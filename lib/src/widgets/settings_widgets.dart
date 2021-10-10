@@ -250,6 +250,7 @@ class ExpandableSettingsTile extends StatelessWidget {
       enabled: enabled,
       expanded: expanded,
       child: SettingsContainer(
+        tileColor: tileColor,
         children: children,
       ),
     );
@@ -280,10 +281,13 @@ class SettingsContainer extends StatelessWidget {
 
   final double leftPadding;
 
+  final Color? tileColor;
+
   SettingsContainer({
     required this.children,
     this.allowScrollInternally = false,
     this.leftPadding = 0.0,
+    this.tileColor,
   });
 
   @override
@@ -299,6 +303,7 @@ class SettingsContainer extends StatelessWidget {
       ),
       child: Material(
         child: Container(
+          color: tileColor,
           padding: EdgeInsets.only(left: leftPadding),
           child: child,
         ),
