@@ -313,6 +313,8 @@ class _ExpansionSettingsTileState extends State<_ExpansionSettingsTile> {
   Widget getExpansionTile() {
     return Material(
       child: ExpansionTile(
+        backgroundColor: widget.tileColor,
+        collapsedBackgroundColor: widget.tileColor,
         title: Text(
           widget.title,
           style: headerTextStyle(context),
