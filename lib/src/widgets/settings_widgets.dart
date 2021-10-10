@@ -54,6 +54,8 @@ class SimpleSettingsTile extends StatelessWidget {
 
   final VoidCallback? onTap;
 
+  final Color? tileColor;
+
   SimpleSettingsTile({
     required this.title,
     this.subtitle,
@@ -63,11 +65,13 @@ class SimpleSettingsTile extends StatelessWidget {
     this.enabled = true,
     this.leading,
     this.onTap,
+    this.tileColor,
   });
 
   @override
   Widget build(BuildContext context) {
     return _SettingsTile(
+      tileColor: tileColor,
       leading: leading,
       title: title,
       subtitle: subtitle,
@@ -146,6 +150,8 @@ class ModalSettingsTile<T> extends StatelessWidget {
   final VoidCallback? onCancel;
   final OnConfirmedCallback? onConfirm;
 
+  final Color? tileColor;
+
   ModalSettingsTile({
     required this.title,
     required this.children,
@@ -155,11 +161,13 @@ class ModalSettingsTile<T> extends StatelessWidget {
     this.showConfirmation = false,
     this.onCancel,
     this.onConfirm,
+    this.tileColor,
   });
 
   @override
   Widget build(BuildContext context) {
     return _ModalSettingsTile<T>(
+      tileColor: tileColor,
       leading: leading,
       title: title,
       subtitle: subtitle,
@@ -219,6 +227,8 @@ class ExpandableSettingsTile extends StatelessWidget {
   /// flag which represents the initial state of the tile, if true the tile state is
   /// set to expanded initially, default = false
   final bool expanded;
+  
+  final Color? tileColor;
 
   ExpandableSettingsTile({
     required this.title,
@@ -227,11 +237,13 @@ class ExpandableSettingsTile extends StatelessWidget {
     this.enabled = true,
     this.expanded = false,
     this.leading,
+    this.tileColor,
   });
 
   @override
   Widget build(BuildContext context) {
     return _ExpansionSettingsTile(
+      tileColor: tileColor,
       leading: leading,
       title: title,
       subtitle: subtitle,
@@ -492,6 +504,8 @@ class TextInputSettingsTile extends StatefulWidget {
   /// [TextInputType] of the [TextFormField] to set the keyboard type to name, phone, etc.
   final TextInputType? keyboardType;
 
+  final Color? tileColor;
+
   TextInputSettingsTile({
     required this.title,
     required this.settingKey,
@@ -505,6 +519,7 @@ class TextInputSettingsTile extends StatefulWidget {
     this.borderColor,
     this.errorColor,
     this.keyboardType,
+    this.tileColor,
   });
 
   @override
@@ -532,6 +547,7 @@ class _TextInputSettingsTileState extends State<TextInputSettingsTile> {
           (BuildContext context, String value, OnChanged<String> onChanged) {
         _controller.text = value;
         return _ModalSettingsTile<String>(
+          tileColor: widget.tileColor,
           title: widget.title,
           subtitle: widget.obscureText ? '' : value,
           showConfirmation: true,
@@ -706,6 +722,8 @@ class SwitchSettingsTile extends StatelessWidget {
   /// state, Any flutter widget can be added in this list
   final List<Widget>? childrenIfEnabled;
 
+  final Color? tileColor;
+
   SwitchSettingsTile({
     required this.title,
     required this.settingKey,
@@ -717,6 +735,7 @@ class SwitchSettingsTile extends StatelessWidget {
     this.disabledLabel = '',
     this.childrenIfEnabled,
     this.subtitle = '',
+    this.tileColor,
   });
 
   @override
@@ -726,6 +745,7 @@ class SwitchSettingsTile extends StatelessWidget {
       defaultValue: defaultValue,
       builder: (BuildContext context, bool value, OnChanged<bool> onChanged) {
         Widget mainWidget = _SettingsTile(
+          tileColor: tileColor,
           leading: leading,
           title: title,
           subtitle: getSubtitle(value),
@@ -860,6 +880,8 @@ class CheckboxSettingsTile extends StatelessWidget {
   /// state, Any flutter widget can be added in this list
   final List<Widget>? childrenIfEnabled;
 
+  final Color? tileColor;
+
   CheckboxSettingsTile({
     required this.title,
     required this.settingKey,
@@ -871,6 +893,7 @@ class CheckboxSettingsTile extends StatelessWidget {
     this.disabledLabel = '',
     this.childrenIfEnabled,
     this.subtitle = '',
+    this.tileColor,
   });
 
   @override
@@ -880,6 +903,7 @@ class CheckboxSettingsTile extends StatelessWidget {
       defaultValue: defaultValue,
       builder: (BuildContext context, bool value, OnChanged<bool> onChanged) {
         var mainWidget = _SettingsTile(
+          tileColor: tileColor,
           leading: leading,
           title: title,
           enabled: enabled,
@@ -1006,6 +1030,8 @@ class RadioSettingsTile<T> extends StatefulWidget {
   /// A Widget that will be displayed in the front of the tile
   final Widget? leading;
 
+  final Color? tileColor;
+
   RadioSettingsTile({
     required this.title,
     required this.settingKey,
@@ -1016,6 +1042,7 @@ class RadioSettingsTile<T> extends StatefulWidget {
     this.leading,
     this.showTitles = true,
     this.subtitle = '',
+    this.tileColor,
   });
 
   @override
@@ -1070,6 +1097,7 @@ class _RadioSettingsTileState<T> extends State<RadioSettingsTile<T>> {
     var radioList =
         widget.values.entries.map<Widget>((MapEntry<T, String> entry) {
       return _SettingsTile(
+        tileColor: widget.tileColor,
         title: entry.value,
         onTap: () => _onRadioChange(entry.key, onChanged),
         enabled: widget.enabled,
@@ -1154,6 +1182,8 @@ class DropDownSettingsTile<T> extends StatefulWidget {
   /// on change callback for handling the value change
   final OnChanged<T>? onChange;
 
+  final Color? tileColor;
+
   DropDownSettingsTile({
     required this.title,
     required this.settingKey,
@@ -1164,6 +1194,7 @@ class DropDownSettingsTile<T> extends StatefulWidget {
     this.subtitle = '',
     this.leading,
     this.alignment = AlignmentDirectional.centerEnd,
+    this.tileColor,
   });
 
   @override
@@ -1189,6 +1220,7 @@ class _DropDownSettingsTileState<T> extends State<DropDownSettingsTile<T>> {
         return SettingsContainer(
           children: <Widget>[
             _SettingsTile(
+              tileColor: widget.tileColor,
               title: widget.title,
               subtitle: widget.subtitle,
               leading: widget.leading,
@@ -1330,6 +1362,8 @@ class SliderSettingsTile extends StatefulWidget {
   ///     display value: 5.25
   final int decimalPrecision;
 
+  final Color? tileColor;
+
   SliderSettingsTile({
     required this.title,
     required this.settingKey,
@@ -1345,6 +1379,7 @@ class SliderSettingsTile extends StatefulWidget {
     this.onChangeEnd,
     this.leading,
     this.decimalPrecision = 2,
+    this.tileColor,
   });
 
   @override
@@ -1371,6 +1406,7 @@ class _SliderSettingsTileState extends State<SliderSettingsTile> {
         return SettingsContainer(
           children: <Widget>[
             _SimpleHeaderTile(
+              tileColor: widget.tileColor,
               title: widget.title,
               subtitle: widget.subtitle.isNotEmpty
                   ? widget.subtitle
@@ -1470,6 +1506,8 @@ class ColorPickerSettingsTile extends StatefulWidget {
   /// on change callback for handling the value change
   final OnChanged<Color>? onChange;
 
+  final Color? tileColor;
+
   ColorPickerSettingsTile({
     required this.title,
     required this.settingKey,
@@ -1479,6 +1517,7 @@ class ColorPickerSettingsTile extends StatefulWidget {
     this.defaultStringValue = '#ff000000',
     this.subtitle = '',
     this.leading,
+    this.tileColor,
   });
 
   @override
@@ -1509,6 +1548,7 @@ class _ColorPickerSettingsTileState extends State<ColorPickerSettingsTile> {
           (BuildContext context, String value, OnChanged<String> onChanged) {
         // debugPrint('creating settings Tile: ${widget.settingKey}');
         return _SettingsColorPicker(
+          tileColor: widget.tileColor,
           title: widget.title,
           value: value,
           leading: widget.leading,
@@ -1585,6 +1625,8 @@ class RadioModalSettingsTile<T> extends StatefulWidget {
   /// on change callback for handling the value change
   final OnChanged<T>? onChange;
 
+  final Color? tileColor;
+
   RadioModalSettingsTile({
     required this.title,
     required this.settingKey,
@@ -1595,6 +1637,7 @@ class RadioModalSettingsTile<T> extends StatefulWidget {
     this.onChange,
     this.subtitle = '',
     this.leading,
+    this.tileColor,
   });
 
   @override
@@ -1625,6 +1668,7 @@ class _RadioModalSettingsTileState<T> extends State<RadioModalSettingsTile<T>> {
       defaultValue: selectedValue,
       builder: (BuildContext context, T value, OnChanged<T> onChanged) {
         return _ModalSettingsTile<T>(
+          tileColor: widget.tileColor,
           title: widget.title,
           subtitle: widget.subtitle.isNotEmpty
               ? widget.subtitle
@@ -1730,6 +1774,8 @@ class SliderModalSettingsTile extends StatefulWidget {
   /// callback for fetching the value slider movement ends
   final OnChanged<double>? onChangeEnd;
 
+  final Color? tileColor;
+
   SliderModalSettingsTile({
     required this.title,
     required this.settingKey,
@@ -1744,6 +1790,7 @@ class SliderModalSettingsTile extends StatefulWidget {
     this.subtitle = '',
     this.leading,
     this.eagerUpdate = true,
+    this.tileColor,
   });
 
   @override
@@ -1771,6 +1818,7 @@ class _SliderModalSettingsTileState extends State<SliderModalSettingsTile> {
         return SettingsContainer(
           children: <Widget>[
             _ModalSettingsTile<double>(
+              tileColor: widget.tileColor,
               title: widget.title,
               subtitle: widget.subtitle.isNotEmpty
                   ? widget.subtitle
@@ -1870,6 +1918,8 @@ class SimpleRadioSettingsTile extends StatelessWidget {
   /// on change callback for handling the value change
   final OnChanged<String>? onChange;
 
+  final Color? tileColor;
+
   SimpleRadioSettingsTile({
     required this.title,
     required this.settingKey,
@@ -1879,11 +1929,13 @@ class SimpleRadioSettingsTile extends StatelessWidget {
     this.onChange,
     this.subtitle = '',
     this.leading,
+    this.tileColor,
   });
 
   @override
   Widget build(BuildContext context) {
     return RadioSettingsTile<String>(
+      tileColor: tileColor,
       title: title,
       subtitle: subtitle,
       leading: leading,
@@ -1956,6 +2008,8 @@ class SimpleDropDownSettingsTile extends StatelessWidget {
   /// on change callback for handling the value change
   final OnChanged<String>? onChange;
 
+  final Color? tileColor;
+
   SimpleDropDownSettingsTile({
     required this.title,
     required this.settingKey,
@@ -1965,11 +2019,13 @@ class SimpleDropDownSettingsTile extends StatelessWidget {
     this.onChange,
     this.subtitle = '',
     this.leading,
+    this.tileColor,
   });
 
   @override
   Widget build(BuildContext context) {
     return DropDownSettingsTile<String>(
+      tileColor: tileColor,
       title: title,
       subtitle: subtitle,
       leading: leading,

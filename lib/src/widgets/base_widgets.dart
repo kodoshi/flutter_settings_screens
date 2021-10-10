@@ -126,6 +126,7 @@ class _SettingsTile extends StatefulWidget {
 
   /// flag to show the child below the main tile elements
   final bool showChildBelow;
+  final Color? tileColor;
 
   _SettingsTile({
     required this.title,
@@ -134,6 +135,7 @@ class _SettingsTile extends StatefulWidget {
     this.titleTextStyle,
     this.subtitleTextStyle,
     this.onTap,
+    this.tileColor,
     this.enabled = true,
     this.showChildBelow = false,
     this.leading,
@@ -156,6 +158,7 @@ class __SettingsTileState extends State<_SettingsTile> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           ListTile(
+            tileColor: widget.tileColor,
             leading: widget.leading,
             title: Text(
               widget.title,
@@ -202,11 +205,14 @@ class _SimpleHeaderTile extends StatefulWidget {
   /// widget to be placed at first in the tile
   final Widget? leading;
 
+  final Color? tileColor;
+
   const _SimpleHeaderTile({
     Key? key,
     this.title,
     this.subtitle = '',
     this.leading,
+    this.tileColor,
   }) : super(key: key);
 
   @override
@@ -218,6 +224,7 @@ class __SimpleHeaderTileState extends State<_SimpleHeaderTile> {
   Widget build(BuildContext context) {
     return AbsorbPointer(
       child: ListTile(
+        tileColor: widget.tileColor,
         title: Text(
           widget.title ?? '',
           style: headerTextStyle(context),
@@ -265,6 +272,8 @@ class _ExpansionSettingsTile extends StatefulWidget {
   /// The widget shown in front of the title
   final Widget? leading;
 
+  final Color? tileColor;
+
   _ExpansionSettingsTile({
     required this.title,
     required this.child,
@@ -272,6 +281,7 @@ class _ExpansionSettingsTile extends StatefulWidget {
     this.enabled = true,
     this.expanded = false,
     this.leading,
+    this.tileColor,
   });
 
   @override
@@ -291,6 +301,7 @@ class _ExpansionSettingsTileState extends State<_ExpansionSettingsTile> {
 
   Widget getListTile() {
     return _SettingsTile(
+      tileColor: widget.tileColor,
       title: widget.title,
       subtitle: widget.subtitle,
       enabled: false,
@@ -338,6 +349,8 @@ class _ModalSettingsTile<T> extends StatefulWidget {
   /// The widget shown in front of the title
   final Widget? leading;
 
+  final Color? tileColor;
+
   /// The list widgets which will be displayed in a vertical list manner
   /// when the dialog is displayed
   final List<Widget> children;
@@ -373,6 +386,7 @@ class _ModalSettingsTile<T> extends StatefulWidget {
     this.subtitle = '',
     this.enabled = true,
     this.leading,
+    this.tileColor,
     this.showConfirmation = false,
     this.onCancel,
     this.onConfirm,
@@ -392,6 +406,7 @@ class __ModalSettingsTileState extends State<_ModalSettingsTile> {
   Widget build(BuildContext context) {
     return Material(
       child: ListTile(
+        tileColor: widget.tileColor,
         leading: widget.leading,
         title: Text(widget.title, style: headerTextStyle(context)),
         subtitle: Text(
@@ -720,6 +735,8 @@ class _SettingsColorPicker extends StatelessWidget {
   /// ignore all the user inputs
   final bool enabled;
 
+  final Color? tileColor;
+  
   _SettingsColorPicker({
     required this.value,
     required this.onChanged,
@@ -727,11 +744,13 @@ class _SettingsColorPicker extends StatelessWidget {
     required this.title,
     this.subtitle = '',
     this.leading,
+    this.tileColor,
   });
 
   @override
   Widget build(BuildContext context) {
     return _SettingsTile(
+      tileColor: tileColor,
       title: title,
       subtitle: subtitle.isNotEmpty ? subtitle : value,
       leading: leading,
